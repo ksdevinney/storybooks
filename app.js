@@ -17,8 +17,11 @@ if(process.env.NODE_ENV === 'development') {
 };
 
 // handlebars
-app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
+app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
 app.set('view engine', '.hbs');
+
+// routes
+app.use('/', require('./routes/index'));
 
 const PORT = process.env.PORT || 8000
 
