@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const { ensureAuth, ensureGuest } = require('../middleware/auth');
 
 // login page
 // GET /
-router.get('/', (req, res) => {
+router.get('/', ensureGuest, (req, res) => {
     res.render('login', {
         // use hbs template
         layout: 'login',
@@ -12,7 +13,7 @@ router.get('/', (req, res) => {
 
 // dashboard page
 // GET /dashboard
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', ensureAuth, (req, res) => {
     res.render('dashboard')
 });
 
