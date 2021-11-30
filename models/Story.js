@@ -6,10 +6,6 @@ const StorySchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    displayName: {
-        type: String,
-        required: true
-    },
     status: {
         type: String,
         default: 'public',

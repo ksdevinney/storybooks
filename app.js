@@ -18,6 +18,9 @@ require('./config/passport')(passport);
 connectDB();
 
 const app = express();
+//body parser middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // logging in
 if(process.env.NODE_ENV === 'development') {
