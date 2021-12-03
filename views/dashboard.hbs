@@ -14,10 +14,10 @@
         <tbody>
             {{#each stories}}
                 <tr>
-                    <td><a href="/stories/{{_id}}"></a>{{title}}</td>
+                    <td><a href="/stories/{{_id}}">{{title}}</a></td>
                     <td>{{formatDate createdAt 'MMMM Do YYYY, hh:mm'}}</td>
                     <td><span class="dash-status">{{status}}</span></td>
-                    <td></td>
+                    {{!-- <td></td> --}}
                 </tr>
             {{/each}}
         </tbody>
