@@ -23,25 +23,35 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // logging in
-if(process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
 };
 
 // handlebars helper
-const { formatDate } = require('./helpers/hbs');
+const { formatDate, stripTags } = require('./helpers/hbs');
 
 // handlebars
-app.engine('.hbs', exphbs({ helpers: { formatDate }, defaultLayout: 'main', extname: '.hbs' }));
+app.engine('.hbs', 
+    exphbs({
+    helpers: {
+        formatDate,
+        stripTags,
+        // truncate,
+    },
+    defaultLayout: 'main',
+    extname: '.hbs'
+    })
+);
 app.set('view engine', '.hbs');
 
 // session middleware
 app.use(
     session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
-    // cookie: { secure:true }
+        secret: 'keyboard cat',
+        resave: false,
+        saveUninitialized: false,
+        store: new MongoStore({ mongooseConnection: mongoose.connection })
+        // cookie: { secure:true }
     })
 );
 
