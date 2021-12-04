@@ -18,17 +18,22 @@ require('./config/passport')(passport);
 connectDB();
 
 const app = express();
+
 //body parser middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// logging in
+// logging
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
 };
 
 // handlebars helper
-const { formatDate, stripTags, truncate, editIcon } = require('./helpers/hbs');
+const { formatDate, 
+        stripTags, 
+        truncate, 
+        editIcon 
+    } = require('./helpers/hbs');
 
 // handlebars
 app.engine('.hbs', 

@@ -25,6 +25,7 @@ router.post('/', ensureAuth, async (req, res) => {
 
 // show all public stories
 // GET /stories/
+// why doesn't this one work????
 router.get('/', ensureAuth, async (req, res) => {
     try {
         const stories = await Story.find({ status: 'public' })
@@ -34,7 +35,7 @@ router.get('/', ensureAuth, async (req, res) => {
 
         res.render('stories/index', {
             stories,
-        })
+        });
     } catch (err) {
         console.error(err);
         res.render('error/500');
