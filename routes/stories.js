@@ -25,7 +25,7 @@ router.post('/', ensureAuth, async (req, res) => {
 
 // show all public stories
 // GET /stories/
-// why doesn't this one work????
+// didn't work because some stories had no body :)))))
 router.get('/', ensureAuth, async (req, res) => {
     try {
         const stories = await Story.find({ status: 'public' })
@@ -39,6 +39,31 @@ router.get('/', ensureAuth, async (req, res) => {
     } catch (err) {
         console.error(err);
         res.render('error/500');
+    }
+});
+
+// edit story
+// get /stories/edit/:id
+router.get('/edit/:id', ensureAuth, async (req, res) => {
+    try {
+        const story = await Story.findOne({
+            _id: req.params.id,
+        }).lean()
+
+        if (!story) {
+            return res.render('error/404')
+        }
+
+        if (story.user != req.user.id) {
+            res.redirect('/stories')
+        } else {
+            res.render('/stories/edit', {
+                story,
+            })
+        }
+    } catch (err) {
+        console.error(err);
+        return res.render('error/500')
     }
 });
 
