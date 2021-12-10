@@ -3,7 +3,7 @@ p {
 }
 
 body {
-    background: aquamarine;
+    background: #cce6ff;
 }
 
 .login-container {
@@ -19,4 +19,8 @@ body {
 .btn-float {
     float: left;
     margin-right: 10px;
+}
+
+.img-small {
+    width: 180px;
 }
